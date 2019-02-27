@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  iQuiz
 //
-//  Created by Anukriti Goyal on 14/2/19.
+//  Created by Anukriti Goyal on 2/26/19.
 //  Copyright © 2019 Anukriti Goyal. All rights reserved.
 //
 
