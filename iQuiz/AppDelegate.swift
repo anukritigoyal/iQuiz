@@ -3,7 +3,7 @@
 //  iQuiz
 //
 //  Created by Anukriti Goyal on 2/26/19.
-//  Copyright © 2019 Anukriti Goyal. All rights reserved.
+//  Copyright © 2019 ischoolnikki. All rights reserved.
 //
 
 import UIKit

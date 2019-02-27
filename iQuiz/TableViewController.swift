@@ -3,14 +3,10 @@
 //  iQuiz
 //
 //  Created by Anukriti Goyal on 2/26/19.
-//  Copyright © 2019 Anukriti Goyal. All rights reserved.
+//  Copyright © 2019 ischoolnikki. All rights reserved.
 //
 
 import UIKit
-
-let categories : [String] = ["Math", "Marvel Superheroes", "Science"]
-let descriptions : [String] = ["Quizzes you on simple calculus questions", "Questions related to Marvel superheroes", "Trivia for fans of Science"]
-let icons : [String] = ["math", "marvel", "science"]
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -25,24 +21,34 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return database.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "main") as? TableCellViewController else {
             fatalError("cell didn't typecast")
         }
-        cell.labelName.text = categories[indexPath.row]
-        cell.icon.image = UIImage(named: icons[indexPath.row])
-        cell.descriptionLabel.text = descriptions[indexPath.row]
+        cell.labelName.text = database[indexPath.row].name
+        cell.icon.image = UIImage(named: database[indexPath.row].icons)
+        cell.descriptionLabel.text = database[indexPath.row].description
         return cell
     }
     
     @IBAction func settingsPressed(_ sender: Any) {
-        let settingsAlert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
+        let settingsAlert = UIAlertController(title: "Settings", message: "Check back for Settings", preferredStyle: .alert)
         settingsAlert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
         self.present(settingsAlert, animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let categorySelected = tableOfCategories.indexPathForSelectedRow?.row
+        let destination = segue.destination as! QuestionsViewController
+        destination.allQuestions = database[categorySelected!].questions
+        destination.questionCurrentIndex = 0
+        destination.scoreCurrent = 0
+    }
+    
 }
+
+
 
