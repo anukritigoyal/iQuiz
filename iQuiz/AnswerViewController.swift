@@ -31,6 +31,7 @@ internal class AnswersViewController: UIViewController {
         }
         answerDisplay.text = "The right answer is: \"" + correctAnswer + "\"."
     }
+    
     @IBAction func nextPressed(_ sender: Any) {
         if currentIndex == questions.count - 1 {
             performSegue(withIdentifier: "finish", sender: self)
@@ -48,8 +49,10 @@ internal class AnswersViewController: UIViewController {
         } else if (segue.identifier == "finish") {
             let destination = segue.destination as! FinishViewController
             destination.totalScore = score
+            destination.totalPossible = questions.count
         }
     }
+    
     @IBAction func backHome(_ sender: Any) {
         performSegue(withIdentifier: "goingHome", sender: self)
     }

@@ -8,43 +8,43 @@
 
 import UIKit
 
-class Categories {
-    var name: String
-    var description: String
-    var icons: String
+class Categories: Decodable {
+    var title: String
+    var desc: String
+    var icons: String?
     var questions: [Questions]
     
-    init(nameVal: String, descriptionVal: String, iconsVal: String, questVals: [Questions]) {
-        name = nameVal
-        description = descriptionVal
+    init(nameVal: String, descriptionVal: String, iconsVal: String?, questVals: [Questions]) {
         icons = iconsVal
+        title = nameVal
+        desc = descriptionVal
         questions = questVals
     }
 }
 
-class Questions {
-    var question: String
-    var answer: [String]
-    var correctAnswer: Int
+class Questions: Decodable {
+    var text: String
+    var answers: [String]
+    var answer: String
     
-    init(questVal: String, answers: [String], correct: Int) {
-        question = questVal
-        answer = answers
-        correctAnswer = correct
+    init(questVal: String, answersVal: [String], correct: String) {
+        text = questVal
+        answers = answersVal
+        answer = correct
     }
 }
 
-let mathQ1 = Questions.init(questVal: "What is the value of π?", answers: ["3.1415926", "3.1421367", "3.1415729", "3.1415927"], correct: 0)
+let mathQ1 = Questions.init(questVal: "What is the value of π?", answersVal: ["3.1415926", "3.1421367", "3.1415729", "3.1415927"], correct: "1")
 
-let mathQ2 = Questions.init(questVal: "What is the newest shape discovered naturally existing in nature?", answers: ["Crytoid", "Cellugon", "Scutoid", "Sporium"], correct: 2)
+let mathQ2 = Questions.init(questVal: "What is the newest shape discovered naturally existing in nature?", answersVal: ["Crytoid", "Cellugon", "Scutoid", "Sporium"], correct: "3")
 
-let marvelQ1 = Questions.init(questVal: "Which war was Captain America frozen in?", answers: ["World War 1", "World War 2", "Cold War", "Civil War"], correct: 1)
+let marvelQ1 = Questions.init(questVal: "Which war was Captain America frozen in?", answersVal: ["World War 1", "World War 2", "Cold War", "Civil War"], correct: "2")
 
-let marvelQ2 = Questions.init(questVal: "The vampire hunter, Blade, is...", answers: ["Mutant", "Vampire", "Human", "Half-Vampire"], correct: 3)
+let marvelQ2 = Questions.init(questVal: "The vampire hunter, Blade, is...", answersVal: ["Mutant", "Vampire", "Human", "Half-Vampire"], correct: "4")
 
-let scienceQ1 = Questions.init(questVal: "What is the first element of the periodic table?", answers: ["Einsteinium", "Calcium", "Oxygen", "Hydrogen"], correct: 3)
+let scienceQ1 = Questions.init(questVal: "What is the first element of the periodic table?", answersVal: ["Einsteinium", "Calcium", "Oxygen", "Hydrogen"], correct: "4")
 
-let scienceQ2 = Questions.init(questVal: "The Sun is a...", answers: ["Planet", "Star", "Meteor", "Jupiter"], correct: 0)
+let scienceQ2 = Questions.init(questVal: "The Sun is a...", answersVal: ["Planet", "Star", "Meteor", "Jupiter"], correct: "2")
 
 let math = Categories.init(nameVal: "Math", descriptionVal: "Quizzes you on simple calculus questions", iconsVal: "math", questVals: [mathQ1, mathQ2])
 

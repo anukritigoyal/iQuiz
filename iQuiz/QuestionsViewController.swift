@@ -26,12 +26,12 @@ class QuestionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         currentQuestion = allQuestions?[questionCurrentIndex!]
-        questionAsked.text = currentQuestion?.question
+        questionAsked.text = currentQuestion?.text
         
-        optionOne.setTitle(currentQuestion?.answer[0], for: .normal)
-        optionTwo.setTitle(currentQuestion?.answer[1], for: .normal)
-        optionThree.setTitle(currentQuestion?.answer[2], for: .normal)
-        optionFour.setTitle(currentQuestion?.answer[3], for: .normal)
+        optionOne.setTitle(currentQuestion?.answers[0], for: .normal)
+        optionTwo.setTitle(currentQuestion?.answers[1], for: .normal)
+        optionThree.setTitle(currentQuestion?.answers[2], for: .normal)
+        optionFour.setTitle(currentQuestion?.answers[3], for: .normal)
     }
     
     @IBAction func submit(_ sender: Any) {
@@ -43,10 +43,11 @@ class QuestionsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "answers" {
             let destination = segue.destination as! AnswersViewController
-            destination.correctAnswer = currentQuestion.answer[currentQuestion.correctAnswer]
+            print("here2here" + currentQuestion.answer)
+            destination.correctAnswer = currentQuestion.answers[Int(currentQuestion.answer)! - 1]
             destination.selectedAnswer = currentSelected.titleLabel?.text
             destination.currentIndex = questionCurrentIndex
-            destination.currentQuestion = currentQuestion?.question
+            destination.currentQuestion = currentQuestion?.text
             destination.questions = allQuestions
             destination.score = scoreCurrent
         }
@@ -74,11 +75,6 @@ class QuestionsViewController: UIViewController {
         currentSelected = sender
         sender.backgroundColor = col
         sender.setTitleColor(UIColor.white, for: .normal)
-    }
     
-    @IBAction func backToHome(_ sender: Any) {
-        performSegue(withIdentifier: "backHome", sender: self)
     }
-    
 }
-
